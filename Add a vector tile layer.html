@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+<title>ArcGIS API for JavaScript: Add a vector tile layer</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+<link rel="stylesheet" href="https://js.arcgis.com/4.22/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.22/"></script>
+
+<script>
+require([
+"esri/config",
+"esri/Map",
+"esri/views/MapView",
+"esri/layers/VectorTileLayer"
+], function(esriConfig, Map, MapView, VectorTileLayer){
+
+esriConfig.apiKey = "AAPK84eddbc087e64d0296d66c62f365fc36Brk7GYp6afVtBNg2BHybof4TUYqlSQeo8XBwBSjEdIQGNMdT1P656BWtsOa8sMXp";
+
+const vtlLayer = new VectorTileLayer({
+  url: "https://vectortileservices3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Santa_Monica_Mountains_Parcels_VTL/VectorTileServer/"
+});
+
+const map = new Map({
+  basemap: "arcgis-light-gray",
+  layers: [vtlLayer]
+});
+
+const view = new MapView({
+  container: "viewDiv",
+  center: [-118.80543,34.02700],
+  zoom: 13,
+  map: map
+});
+});
+</script>
+
+</head>
+
+<body>
+<div id="viewDiv"></div>
+</body>
+</html>
