@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>ArcGIS API for JavaScript Tutorials: Display a map</title>
+    <title>ArcGIS API for JavaScript Tutorials: Change the basemap layer</title>
 
     <style>
       html,
@@ -20,7 +20,10 @@
     <script src="https://js.arcgis.com/4.21/"></script>
 
     <script>
-      require(["esri/config","esri/Map", "esri/views/MapView"], function (esriConfig, Map, MapView) {
+      require(["esri/config","esri/Map", 
+	           "esri/views/MapView", 
+			   "esri/widgets/BasemapToggle", 
+			   "esri/widgets/BasemapGallery"], function (esriConfig, Map, MapView, BasemapToggle, BasemapGallery) {
 
         esriConfig.apiKey = "AAPK84eddbc087e64d0296d66c62f365fc36Brk7GYp6afVtBNg2BHybof4TUYqlSQeo8XBwBSjEdIQGNMdT1P656BWtsOa8sMXp";
 
@@ -34,6 +37,24 @@
           zoom: 13, // Zoom level
           container: "viewDiv" // Div element
         });
+		
+		const basemapToggle = new BasemapToggle({
+		view: view,
+		nextBasemap: "arcgis-imagery"
+		});
+		
+		view.ui.add(basemapToggle, "bottom-right");
+		
+		const basemapGallery = new BasemapGallery({
+		view: view,
+		source: {
+		query: {
+		title: '"World Basemaps for Developers" AND owner:esri'
+		}
+		}
+		});
+		
+		view.ui.add(basemapGallery, "top-right");
 
       });
     </script>
